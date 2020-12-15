@@ -6,6 +6,9 @@ const bodyParser = require("body-parser");
 const cookieSession = require("cookie-session");
 
 const authRoutes = require("./routes/authRoutes");
+const quizRoutes = require("./routes/quizRoutes");
+
+const requireLogin = require("./middlewares/requireLogin");
 
 const app = express();
 
@@ -31,7 +34,8 @@ app.get("/", (req, res) => {
   res.send({ welcome: "to my react quiz app" });
 });
 
-// auth route
+// routes
 app.use("/auth", authRoutes);
+app.use("/api", requireLogin, quizRoutes);
 
 app.listen(5000);

@@ -4,6 +4,8 @@ const config = require("config");
 
 const router = express.Router();
 
+const requireLogin = require("../middlewares/requireLogin");
+
 require("../models/User");
 
 // github login
@@ -27,11 +29,11 @@ router.get("/google/callback", passport.authenticate("google"), (req, res) => {
 });
 
 // get the current logged on user
-router.get("/current_user", (req, res) => {
+router.get("/current_user", requireLogin, (req, res) => {
   res.send(req.user);
 });
 
-router.get("/logout", (req, res) => {
+router.get("/logout", requireLogin, (req, res) => {
   req.logOut();
   res.send("successfully loged out");
 });
