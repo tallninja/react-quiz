@@ -1,11 +1,12 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
-const AnswerSchema = require("./Answer");
+const ChoiceSchema = require("./Choice");
 
 const QuestionSchema = new Schema({
   title: String,
-  answers: [AnswerSchema],
+  choices: [ChoiceSchema],
+  answer: Array,
 });
 
 module.exports = QuestionSchema;

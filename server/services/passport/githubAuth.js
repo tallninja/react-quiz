@@ -15,7 +15,7 @@ passport.use(
     {
       clientID: clientID,
       clientSecret: clientSecret,
-      redirectURL: "/auth/github/callback",
+      callbackURL: "/auth/github/callback",
     },
     async (accessToken, refreshToken, profile, done) => {
       const existingUser = await User.findOne({ authID: profile.id });

@@ -15,7 +15,7 @@ router.get(
   passport.authenticate("github", { scope: ["read:user"] })
 );
 router.get("/github/callback", passport.authenticate("github"), (req, res) => {
-  res.redirect("/");
+  res.redirect("/home");
 });
 
 //google login
@@ -25,17 +25,17 @@ router.get(
   passport.authenticate("google", { scope: ["profile", "email"] })
 );
 router.get("/google/callback", passport.authenticate("google"), (req, res) => {
-  res.redirect("/");
+  res.redirect("/home");
 });
 
 // get the current logged on user
-router.get("/current_user", requireLogin, (req, res) => {
+router.get("/current_user", (req, res) => {
   res.send(req.user);
 });
 
 router.get("/logout", requireLogin, (req, res) => {
   req.logOut();
-  res.send("successfully loged out");
+  res.redirect("/");
 });
 
 module.exports = router;
